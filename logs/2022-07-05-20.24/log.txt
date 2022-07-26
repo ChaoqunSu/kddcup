@@ -1,6 +1,0 @@
-[Tue Jul 05 20:24:12 2022|train.py|INFO] The experimental settings are: 
-{'path_to_test_x': './data/sdwpf_baidukddcup2022_test_toy/test_x', 'path_to_test_y': './data/sdwpf_baidukddcup2022_test_toy/test_y', 'data_path': './data', 'train_filename': 'wtbdata_245days.csv', 'val_filename': '0001in.csv', 'input_len': 288, 'output_len': 288, 'label_len': 144, 'start_col': 3, 'var_len': 10, 'var_out': 10, 'capacity': 134, 'patient': 3, 'day_len': 144, 'train_size': 235, 'val_size': 10, 'turbine_id': 0, 'is_debug': True, 'checkpoints': './checkpoints', 'logs_path': './logs', 'num_workers': 5, 'train_epochs': 20, 'batch_size': 32, 'log_per_steps': 50, 'lr': 0.0001, 'gpu': 8, 'hidden_dims': 128, 'nhead': 8, 'dropout': 0.1, 'encoder_layers': 2, 'decoder_layers': 1, 'name': 'FilterMSELoss', 'pred_file': 'predict.py', 'framework': 'paddlepaddle', 'use_gpu': True}
-[Tue Jul 05 20:25:25 2022|train.py|INFO] Step 50 Train MSE-Loss: 364042.38 RMSE-Loss: 603.35925
-[Tue Jul 05 20:26:21 2022|train.py|INFO] Step 100 Train MSE-Loss: 311888.5 RMSE-Loss: 558.4698
-[Tue Jul 05 20:27:18 2022|train.py|INFO] Step 150 Train MSE-Loss: 305674.72 RMSE-Loss: 552.8786
-[Tue Jul 05 20:28:14 2022|train.py|INFO] Step 200 Train MSE-Loss: 192004.2 RMSE-Loss: 438.18283
