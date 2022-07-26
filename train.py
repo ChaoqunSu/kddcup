@@ -21,8 +21,8 @@ def data_augment(x, y, input, p=0.9, alpha=0.5, beta=0.5):
     """
     Regression SMOTE
     """
-    # batch+x,batch_y: N, L,C=134
-    # input_y: N, C=134, L, feature_len
+    # batch+x,batch_y: batch_size, L,C=134
+    # input_y: batch_size, C=134, L, feature_len
     batch_size = x.shape[0]
     random_values = paddle.rand([batch_size])
     idx_to_change = random_values < p
@@ -143,8 +143,8 @@ def train_and_val(settings, model, is_debug=False):
     for epoch in range(settings["train_epochs"]):
         model.train()
         for i, (batch_x, batch_y, input_y) in enumerate(train_loader):
-            # batch_x,batch_y: N,input_len/label+output_len,C(134turb)
-            # input_y: N, 134,label+output_len, C(10features)
+            # batch_x,batch_y: batch_size,input_len/label+output_len,C(134turb)
+            # input_y: batch_size, 134,label+output_len, C(10features)
             batch_x = batch_x.astype('float32')
             batch_y = batch_y.astype('float32')
             input_y = input_y.astype('float32')
@@ -152,9 +152,9 @@ def train_and_val(settings, model, is_debug=False):
 
             input_y = input_y[:, :, -settings["output_len"]:, :]
             batch_y = batch_y[:, -settings["output_len"]:, :]
-            # pred_y: N,134,288
+            # pred_y: batch_size,134,288
             pred_y = model(batch_x)
-            # batch_y: N,288,134-->truth: N,134,288
+            # batch_y: batch_size,288,134-->truth: N,134,288
             truth = paddle.transpose(batch_y, [0, 2, 1])
             loss = loss_fn(pred_y, truth, input_y, col_names)
             loss.backward()
@@ -211,34 +211,34 @@ def validation(valid_data_loader,
     gold_batch = []
     scaler = train_dataset.get_scaler()
     for batch_x, batch_y, input_y in valid_data_loader:
-        # batch_x,batch_y: N,input_len/label+output_len,C(134turb)
-        # input_y: N, 134,label+output_len, C(10features)
+        # batch_x,batch_y: batch_size,input_len/label+output_len,C(134turb)
+        # input_y: batch_size, 134,label+output_len, C(10features)
         batch_x = batch_x.astype('float32')
         batch_y = batch_y.astype('float32')
 
-        # N, 134,output_len
+        # batch_size, 134,output_len
         pred_y = model(batch_x)
-        # N, label+output_len,C(134turb)-->N, output_len,C(134turb)
+        # batch_size, label+output_len,C(134turb)-->N, output_len,C(134turb)
         batch_y = batch_y[:, -settings["output_len"]:, :]
-        # N, 134,output_len
+        # batch_size, 134,output_len
         truth = paddle.transpose(batch_y, [0, 2, 1])
-        # N, 134, output_len, C(10features)
+        # batch_size, 134, output_len, C(10features)
         input_y = input_y[:, :, -settings["output_len"]:, :].astype('float32')
 
         loss = loss_fn(pred_y, truth, input_y, col_names)
         losses.append(loss.numpy()[0])
 
-        # N, 134,output_len-->N, output_len, 134再进inverse_transform
+        # batch_size, 134,output_len-->N, output_len, 134再进inverse_transform
         pred_y = paddle.transpose(pred_y, [0, 2, 1])
         inverse_pred_y = scaler.inverse_transform(pred_y)
-        # N, output_len-->N, 134, output_len
+        # batch_size, output_len-->N, 134, output_len
         inverse_pred_y = paddle.transpose(inverse_pred_y, [0, 2, 1])
         inverse_pred_y = F.relu(inverse_pred_y)
 
-        # N, 134,output_len-->N, output_len, 134
+        # batch_size, 134,output_len-->N, output_len, 134
         truth = paddle.transpose(truth, [0, 2, 1])
         inverse_truth = scaler.inverse_transform(truth)
-        # N, output_len-->N, 134, output_len
+        # batch_size, output_len-->N, 134, output_len
         inverse_truth = paddle.transpose(inverse_truth, [0, 2, 1])
         pred_batch.append(inverse_pred_y.numpy())
         gold_batch.append(inverse_truth.numpy())
