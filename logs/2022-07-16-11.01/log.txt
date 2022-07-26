@@ -1,0 +1,58 @@
+[Sat Jul 16 11:01:13 2022|train2.py|INFO] The experimental settings are: 
+{'path_to_test_x': './data/0001in.csv', 'path_to_test_y': './data/sdwpf_baidukddcup2022_test_toy/test_y', 'data_path': './data', 'train_filename': 'wtbdata_245days.csv', 'val_filename': '0001in.csv', 'input_len': 144, 'output_len': 288, 'label_len': 72, 'start_col': 3, 'var_len': 134, 'var_out': 134, 'capacity': 134, 'patient': 5, 'day_len': 144, 'train_size': 155, 'val_size': 80, 'aug_p': 0.9, 'is_debug': True, 'inverse': False, 'checkpoints': './checkpoints_34', 'logs_path': './logs', 'num_workers': 5, 'train_epochs': 15, 'batch_size': 32, 'log_per_steps': 100, 'lr': 0.0001, 'lr_adjust': 'type1', 'gpu': 7, 'hidden_dims': 512, 'nhead': 8, 'dropout': 0.05, 'encoder_layers': 2, 'decoder_layers': 1, 'name': 'FilterMSELoss', 'pred_file': 'predict.py', 'framework': 'paddlepaddle', 'use_gpu': True}
+[Sat Jul 16 11:01:13 2022|train2.py|INFO] 
+>>>>>>>Start training 
+
+[Sat Jul 16 11:02:02 2022|train2.py|INFO] Step 100 Train MSE-Loss: 0.54984814 RMSE-Loss: 0.7415175
+[Sat Jul 16 11:02:18 2022|train2.py|INFO] Step 200 Train MSE-Loss: 0.4789502 RMSE-Loss: 0.69206226
+[Sat Jul 16 11:02:34 2022|train2.py|INFO] Step 300 Train MSE-Loss: 0.68695015 RMSE-Loss: 0.8288246
+[Sat Jul 16 11:02:48 2022|train2.py|INFO] Step 400 Train MSE-Loss: 0.52626854 RMSE-Loss: 0.72544366
+[Sat Jul 16 11:03:03 2022|train2.py|INFO] Step 500 Train MSE-Loss: 0.53802526 RMSE-Loss: 0.73350203
+[Sat Jul 16 11:03:19 2022|train2.py|INFO] Step 600 Train MSE-Loss: 0.622249 RMSE-Loss: 0.7888276
+[Sat Jul 16 11:09:37 2022|train2.py|INFO] Valid {'farm_mae': 38.50314068487219, 'farm_rmse': 46.07554743792652, 'turb_score': 42.289344061399355, 'loss': 0.576366}
+[Sat Jul 16 11:09:37 2022|train2.py|INFO] the best model's score is:42.289344061399355
+[Sat Jul 16 11:09:40 2022|train2.py|INFO] Step 700 Train MSE-Loss: 0.53517514 RMSE-Loss: 0.73155665
+[Sat Jul 16 11:09:54 2022|train2.py|INFO] Step 800 Train MSE-Loss: 0.4592071 RMSE-Loss: 0.6776482
+[Sat Jul 16 11:10:07 2022|train2.py|INFO] Step 900 Train MSE-Loss: 0.51605564 RMSE-Loss: 0.71837014
+[Sat Jul 16 11:10:21 2022|train2.py|INFO] Step 1000 Train MSE-Loss: 0.56393236 RMSE-Loss: 0.7509543
+[Sat Jul 16 11:10:33 2022|train2.py|INFO] Step 1100 Train MSE-Loss: 0.60143155 RMSE-Loss: 0.7755202
+[Sat Jul 16 11:10:46 2022|train2.py|INFO] Step 1200 Train MSE-Loss: 0.68894684 RMSE-Loss: 0.83002824
+[Sat Jul 16 11:10:58 2022|train2.py|INFO] Step 1300 Train MSE-Loss: 0.45673537 RMSE-Loss: 0.675822
+[Sat Jul 16 11:17:13 2022|train2.py|INFO] Valid {'farm_mae': 38.73331845080571, 'farm_rmse': 46.12959786230441, 'turb_score': 42.43145815655506, 'loss': 0.565122}
+[Sat Jul 16 11:17:13 2022|train2.py|INFO] the best model's score is:42.289344061399355
+[Sat Jul 16 11:17:21 2022|train2.py|INFO] Step 1400 Train MSE-Loss: 0.66426957 RMSE-Loss: 0.81502736
+[Sat Jul 16 11:17:36 2022|train2.py|INFO] Step 1500 Train MSE-Loss: 0.4849313 RMSE-Loss: 0.69637007
+[Sat Jul 16 11:17:52 2022|train2.py|INFO] Step 1600 Train MSE-Loss: 0.5429205 RMSE-Loss: 0.73683137
+[Sat Jul 16 11:18:07 2022|train2.py|INFO] Step 1700 Train MSE-Loss: 0.5433189 RMSE-Loss: 0.73710173
+[Sat Jul 16 11:18:23 2022|train2.py|INFO] Step 1800 Train MSE-Loss: 0.46713486 RMSE-Loss: 0.68347263
+[Sat Jul 16 11:18:39 2022|train2.py|INFO] Step 1900 Train MSE-Loss: 0.70359135 RMSE-Loss: 0.8388035
+[Sat Jul 16 11:18:54 2022|train2.py|INFO] Step 2000 Train MSE-Loss: 0.57388735 RMSE-Loss: 0.7575535
+[Sat Jul 16 11:25:28 2022|train2.py|INFO] Valid {'farm_mae': 38.80947463686484, 'farm_rmse': 46.18218866655242, 'turb_score': 42.49583165170863, 'loss': 0.5667012}
+[Sat Jul 16 11:25:28 2022|train2.py|INFO] the best model's score is:42.289344061399355
+[Sat Jul 16 11:25:39 2022|train2.py|INFO] Step 2100 Train MSE-Loss: 0.5087053 RMSE-Loss: 0.7132358
+[Sat Jul 16 11:25:58 2022|train2.py|INFO] Step 2200 Train MSE-Loss: 0.5948615 RMSE-Loss: 0.77127266
+[Sat Jul 16 11:26:14 2022|train2.py|INFO] Step 2300 Train MSE-Loss: 0.4700017 RMSE-Loss: 0.6855667
+[Sat Jul 16 11:26:32 2022|train2.py|INFO] Step 2400 Train MSE-Loss: 0.48933095 RMSE-Loss: 0.69952196
+[Sat Jul 16 11:26:51 2022|train2.py|INFO] Step 2500 Train MSE-Loss: 0.56455064 RMSE-Loss: 0.75136584
+[Sat Jul 16 11:27:12 2022|train2.py|INFO] Step 2600 Train MSE-Loss: 0.5311863 RMSE-Loss: 0.7288253
+[Sat Jul 16 11:27:29 2022|train2.py|INFO] Step 2700 Train MSE-Loss: 0.60102147 RMSE-Loss: 0.77525574
+[Sat Jul 16 11:34:57 2022|train2.py|INFO] Valid {'farm_mae': 38.81709432817826, 'farm_rmse': 46.178972986043505, 'turb_score': 42.49803365711088, 'loss': 0.56542}
+[Sat Jul 16 11:34:57 2022|train2.py|INFO] the best model's score is:42.289344061399355
+[Sat Jul 16 11:35:08 2022|train2.py|INFO] Step 2800 Train MSE-Loss: 0.599082 RMSE-Loss: 0.77400386
+[Sat Jul 16 11:35:22 2022|train2.py|INFO] Step 2900 Train MSE-Loss: 0.62548965 RMSE-Loss: 0.790879
+[Sat Jul 16 11:35:37 2022|train2.py|INFO] Step 3000 Train MSE-Loss: 0.81930196 RMSE-Loss: 0.905153
+[Sat Jul 16 11:35:52 2022|train2.py|INFO] Step 3100 Train MSE-Loss: 0.411009 RMSE-Loss: 0.6410999
+[Sat Jul 16 11:36:06 2022|train2.py|INFO] Step 3200 Train MSE-Loss: 0.6530287 RMSE-Loss: 0.80810195
+[Sat Jul 16 11:36:20 2022|train2.py|INFO] Step 3300 Train MSE-Loss: 0.51817465 RMSE-Loss: 0.7198435
+[Sat Jul 16 11:36:32 2022|train2.py|INFO] Step 3400 Train MSE-Loss: 0.49416116 RMSE-Loss: 0.702966
+[Sat Jul 16 11:42:56 2022|train2.py|INFO] Valid {'farm_mae': 38.84973909982463, 'farm_rmse': 46.21080373200833, 'turb_score': 42.53027141591648, 'loss': 0.5654587}
+[Sat Jul 16 11:42:56 2022|train2.py|INFO] the best model's score is:42.289344061399355
+[Sat Jul 16 11:43:06 2022|train2.py|INFO] Step 3500 Train MSE-Loss: 0.4139154 RMSE-Loss: 0.6433626
+[Sat Jul 16 11:43:19 2022|train2.py|INFO] Step 3600 Train MSE-Loss: 0.59529907 RMSE-Loss: 0.77155626
+[Sat Jul 16 11:43:32 2022|train2.py|INFO] Step 3700 Train MSE-Loss: 0.6109656 RMSE-Loss: 0.7816429
+[Sat Jul 16 11:43:43 2022|train2.py|INFO] Step 3800 Train MSE-Loss: 0.62270397 RMSE-Loss: 0.78911597
+[Sat Jul 16 11:43:56 2022|train2.py|INFO] Step 3900 Train MSE-Loss: 0.39377937 RMSE-Loss: 0.6275184
+[Sat Jul 16 11:44:09 2022|train2.py|INFO] Step 4000 Train MSE-Loss: 0.38575453 RMSE-Loss: 0.6210914
+[Sat Jul 16 11:44:22 2022|train2.py|INFO] Step 4100 Train MSE-Loss: 0.55323017 RMSE-Loss: 0.74379444
+[Sat Jul 16 11:49:48 2022|train2.py|INFO] Valid {'farm_mae': 38.85294375835929, 'farm_rmse': 46.18672267154328, 'turb_score': 42.519833214951284, 'loss': 0.563705}
+[Sat Jul 16 11:49:48 2022|train2.py|INFO] the best model's score is:42.289344061399355
