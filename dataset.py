@@ -54,7 +54,7 @@ class Scaler(object):
 
 class WPFDataset(Dataset):
     """
-    把134个turbine的patv拿出来拼成新df,len*134
+    extract Patv of 134 turbines and concate to new df, len*134
     """
 
     first_initialized = False
@@ -129,13 +129,9 @@ class WPFDataset(Dataset):
         df_patv = pd.DataFrame(patv_arr.reshape((35280, self.capacity), order='F'), columns=col_ls,
                                index=None)
         print('the shape of df_patv:{}'.format(df_patv.shape))
-        # 算归一化方差和均值只能用训练集, train_size * feature_len，train_data是用来算归一化参数的
         train_data = df_patv[border1s[0]:border2s[0]]
-
-        # 依照不同flag选出训练集和验证集,data_x需要做归一化
         data_x = df_patv[border1:border2]
 
-        # 计算metrics时用来对照的raw_df_data,valDataset才调用
         raw_df_data = self.raw_df_data
         cols_data = raw_df_data.columns
         raw_data = raw_df_data.values
@@ -145,19 +141,16 @@ class WPFDataset(Dataset):
         for turb_id in range(self.capacity):
             self.raw_df.append(
                 pd.DataFrame(
-                    # 计算metrics，用到每个turbine最原始的df，val/test时调用，拿到的是对应val_dataset的
                     data=raw_data[turb_id, border1 + self.input_len:border2, :],
                     columns=cols_data))
-        # 算loss时的input_y来源
         input_df_data = self.df_data
         cols_data = input_df_data.columns
         input_data = input_df_data.values
         input_data = np.reshape(
             input_data, [self.capacity, self.total_size, len(cols_data)])
         self.input_y = input_data[:, border1:border2, :]
-        # 留出data_y，不作预处理和归一化，用来计算filter_loss
         data_y = df_patv[border1:border2]
-        # 拟合归一化
+        # Normalization
         scaler = Scaler()
         scaler.fit(train_data.values)
         self.scaler = scaler
@@ -198,9 +191,9 @@ class WPFDataset(Dataset):
         r_end = r_begin + self.label_len + self.output_len
         seq_x = self.data_x[s_begin:s_end]
         seq_y = self.data_y[r_begin:r_end]
-        # input_y是134,L, C(10features)
+        # input_y:134,L, C(10features)
         input_y = self.input_y[:, r_begin:r_end, :]
-        # batch_x,batch_y皆为L,C(134turb)
+        # batch_x,batch_y:L,C(134turb)
         return seq_x, seq_y, input_y
 
     def __len__(self):
@@ -213,15 +206,14 @@ class WPFDataset(Dataset):
                'TurbID' not in n
         ]
         # ['Wspd', 'Wdir', 'Etmp', 'Itmp', 'Ndir', 'Pab1', 'Pab2', 'Pab3', 'Prtv','Patv']
-        # new_df_data就是后十个属性组成的新df
         new_df_data = df_data[feature_name]
         pd.set_option('mode.chained_assignment', None)
         raw_df_data = new_df_data
         new_df_data = new_df_data.replace(
             to_replace=np.nan, value=0.0, inplace=False)
-        # 负值取0.0
+        # negative->0.0
         new_df_data.loc[(0.0 > new_df_data['Patv']), 'Patv'] = 0.0
-        # new_df_data是12个列并且处理缺失值的新df,raw_df_data是不处理缺失值的新df
+
         return new_df_data, raw_df_data
 
 
@@ -250,7 +242,6 @@ class TestDataset(Dataset):
 
     def __read_data__(self):
         df_raw = pd.read_csv(self.filename)
-        # df_data, raw_df_data都是后十个feature组成的df,df_data做了缺失值填充
         df_data, raw_df_data = self.data_preprocess(df_raw)
         self.df_data = df_data
         self.raw_df_data = raw_df_data
@@ -271,7 +262,6 @@ class TestDataset(Dataset):
         df_patv = pd.DataFrame(patv_arr.reshape((patv_len, self.capacity), order='F'), columns=col_ls,
                                index=None)
         print('the shape of df_patv:{}'.format(df_patv.shape))
-        # 依照不同flag选出训练集和验证集,data_x需要做归一化
         data_x = df_patv.values
         # L,134-->1,L,134
         data_x = np.expand_dims(data_x, 0)
@@ -284,14 +274,12 @@ class TestDataset(Dataset):
                'TurbID' not in n
         ]
         # ['Wspd', 'Wdir', 'Etmp', 'Itmp', 'Ndir', 'Pab1', 'Pab2', 'Pab3', 'Prtv','Patv']
-        # new_df_data就是后十个属性组成的新df
         new_df_data = df_data[feature_name]
         pd.set_option('mode.chained_assignment', None)
         raw_df_data = new_df_data
         new_df_data = new_df_data.replace(
             to_replace=np.nan, value=0.0, inplace=False)
         new_df_data.loc[(0.0 > new_df_data['Patv']), 'Patv'] = 0.0
-        # new_df_data是12个列并且处理缺失值的新df,raw_df_data是不处理缺失值的新df
         return new_df_data, raw_df_data
 
     def get_data(self):
