@@ -109,7 +109,6 @@ class WPFDataset(Dataset):
 
     def __read_data__(self):
         df_raw = pd.read_csv(os.path.join(self.data_path, self.filename))
-        # df_data, raw_df_data都是后十个feature组成的df,df_data做了缺失值填充
         df_data, raw_df_data = self.data_preprocess(df_raw)
         self.df_data = df_data
         self.raw_df_data = raw_df_data
