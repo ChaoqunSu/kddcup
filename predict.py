@@ -25,10 +25,10 @@ def forecast(settings):
     model1.eval()
     test_x_path = settings["path_to_test_x"]
     test_x_ds = TestDataset(filename=test_x_path, size=size)
-    # get_data返回1,L,134-->截取：1,288,134
+    # get_data return:1,L,134-->1,288,134
     test_x = paddle.to_tensor(
         test_x_ds.get_data()[:, -settings["input_len"]:, :], dtype="float32")
-    # 先归一化再送进去
+    # Normalization
     scaled_test_x1 = scaler1.transform(test_x)
     # 1, 134,288
     pred_y_1 = model1(scaled_test_x1)
