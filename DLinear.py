@@ -30,8 +30,6 @@ class WPFModel(nn.Layer):
         super(WPFModel, self).__init__()
         self.input_len = settings["input_len"]
         self.output_len = settings["output_len"]
-        self.var_len = settings["var_len"]
-        self.hidden_dims = settings["hidden_dims"]
 
         DECOMP = 18
         self.decomp = SeriesDecomp(DECOMP)
@@ -48,8 +46,6 @@ class WPFModel(nn.Layer):
         self.Linear_Trend.weight = paddle.create_parameter(y1.shape, dtype='float32',
                                                            default_initializer=nn.initializer.Assign(y1))
 
-        self.Linear_Decoder = nn.Linear(self.hidden_dims, self.var_len)
-
     def forward(self, batch_x):
         """
         :param batch_x: [N, L, C]  C=134(turbines)
@@ -62,6 +58,6 @@ class WPFModel(nn.Layer):
         seasonal_output = self.Linear_Seasonal(seasonal_init)
         trend_output = self.Linear_Trend(trend_init)
 
-        # N, hidden_dims, output_len
+        # N, 134, output_len
         pred_y = seasonal_output + trend_output
         return pred_y[:, :, -self.output_len:]
