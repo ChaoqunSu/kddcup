@@ -1,5 +1,5 @@
 # kddcup
-Baidu KDD CUP 2022
+# Sixth place in the PaddlePaddle track of Baidu KDD Cup 2022 
 
 
 Please install the libraries as follows:
