@@ -1,5 +1,5 @@
-# kddcup
-# Sixth place in the PaddlePaddle track of KDD CUP 2022 
+# KDDCUP2022
+# Sixth place in the PaddlePaddle track
 
 
 Please install the libraries as follows:
