@@ -1,5 +1,4 @@
-# KDDCUP2022
-# Sixth place in the PaddlePaddle track
+# KDDCUP2022(Sixth place in the PaddlePaddle track)
 
 
 Please install the libraries as follows:
